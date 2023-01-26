@@ -12,8 +12,8 @@ engine = create_engine(
 )
 
 # Query Debugging Level
-logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
-
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO) # 쿼리
+# logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG) # 결과
 SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)
 
 

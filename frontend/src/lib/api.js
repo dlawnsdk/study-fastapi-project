@@ -13,18 +13,27 @@ const fastapi = (operation, url, params, success_callback, failuer_callback) => 
     let options = {
         method: method,
         headers: {
-            "Content-Type": content_type
+            // "Content-Type": content_type,
+            "Access-Control-Allow-Headers" : "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         }
     }
 
-    if(method != 'get'){
+    if(method !== 'get'){
         options['body'] = body
+        console.log(options)
     }
 
     // Server로 URL 전달
     // fetch: Client에서 직접 API 호출
      fetch(_url, options)
         .then(response => {
+            if(response.status === 204){
+                if(success_callback){
+                    success_callback()
+                }
+                return
+            }
             response.json()
                 .then(json => {
                     // 성공했을때 프로토콜 응답코드(200 ~ 299)
