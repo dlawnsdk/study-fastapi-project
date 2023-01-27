@@ -3,7 +3,7 @@
     export let params = {} // 파라미터 받아주는 변수
 
     let question_id = params.question_id
-    let question = {}
+    let question = {answer:[]}
     let content = ""
 
     function get_question(){
@@ -23,7 +23,8 @@
         fastapi('post', url, params, (json) =>{
             content = ''
             get_question()
-        })
+            }
+        )
     }
 </script>
 
@@ -31,7 +32,12 @@
 <div>
     {question.content}
 </div>
+<ul>
+    {#each question.answer as answer}
+        <li>{answer.content}</li>
+    {/each}
+</ul>
 <form method="post">
     <textarea rows="15" bind:value={content}></textarea>
-    <input type="submit" value="답변등록" on:click={post_answer}>
+    <input type="submit" value="답변 등록" on:click={post_answer}>
 </form>

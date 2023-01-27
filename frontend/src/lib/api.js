@@ -1,4 +1,4 @@
-const fastapi = (operation, url, params, success_callback, failuer_callback) => {
+const fastapi = (operation, url, params, success_callback, failure_callback) => {
     let method = operation
     let content_type = 'application/json'
     let body = JSON.stringify(params) // body 항목에 전달 받은  parameter를 할당 하려면 JSON 타입으로 변환 해야 한다.
@@ -13,15 +13,15 @@ const fastapi = (operation, url, params, success_callback, failuer_callback) => 
     let options = {
         method: method,
         headers: {
-            // "Content-Type": content_type,
-            "Access-Control-Allow-Headers" : "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        }
+           "Content-Type": content_type,
+            // "Access-Control-Allow-Headers" : "*",
+            // "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        mode: 'cors'
     }
 
     if(method !== 'get'){
         options['body'] = body
-        console.log(options)
     }
 
     // Server로 URL 전달
