@@ -14,10 +14,7 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
         method: method,
         headers: {
            "Content-Type": content_type,
-            // "Access-Control-Allow-Headers" : "*",
-            // "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
-        mode: 'cors'
     }
 
     if(method !== 'get'){

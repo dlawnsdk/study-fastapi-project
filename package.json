@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "pip": "^0.0.1",
     "svelte-spa-router": "^3.3.0"
   }
