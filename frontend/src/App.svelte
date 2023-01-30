@@ -3,6 +3,7 @@
   import Home from "./routes/Home.svelte"
   import Detail from "./routes/Detail.svelte"
   import QuestionCreate from "./routes/QuestionCreate.svelte"
+  import Navigation from "./components/Navigation.svelte"
 
   // 처음 URL을 받으면 해당 경로에 따른 컴포넌트 호출
   const routes = {
@@ -14,4 +15,5 @@
   }
 </script>
 
+<Navigation />
 <Router {routes} />
