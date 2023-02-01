@@ -8,6 +8,7 @@ class Question(BaseModel):
     id: int
     subject: str
     content: str
+    create_date: datetime.datetime
     answer: list[Answer] = []
 
     class Config:
@@ -22,7 +23,7 @@ class QuestionList(BaseModel):
 class QuestionCreate(BaseModel):
     subject: str
     content: str
-
+    create_date: datetime.datetime
     @validator('subject', 'content')
     def not_empty(cls, v):
         if not v or not v.strip():

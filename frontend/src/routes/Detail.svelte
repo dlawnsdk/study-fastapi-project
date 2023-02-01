@@ -1,6 +1,10 @@
 <script>
     import fastapi from "../lib/api";
     import Error from "../components/Error.svelte"
+    import { push } from 'svelte-spa-router'
+    import moment from 'moment/min/moment-with-locales'
+    moment.locale('ko')
+
     export let params = {} // 파라미터 받아주는 변수
 
     let error = {detail:[]}
@@ -37,25 +41,27 @@
             <div class="card-text" style="white-space: pre-line;">{question.content}</div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2">
-                    {question.create_date}
+                    {moment(question.create_date).format("YYYY. MM. DD a hh시")}
                 </div>
             </div>
         </div>
     </div>
+    <button class="btn btn-secondary" on:click={() => push('/')}>목륵</button>
     <!-- 답변 목록 -->
-<!--     <Error error={error} />-->
+     <Error error={error} />
     <h5 class="border-bottom my-3 py-2">{question.answer.length}개의 답변이 있습니다.</h5>
    {#each question.answer as answer}
-    <div class="card my-3">
-        <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;">{answer.content}</div>
-            <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2">
-                    {answer.create_date}
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;">{answer.content}</div>
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-light text-dark p-2">
+                        <!--{answer.create_date}-->
+                        {moment(answer.create_date).format("YYYY. MM. DD a hh시")}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {/each}
     <form method="post" class="my-3">
         <div class="mb-3">
