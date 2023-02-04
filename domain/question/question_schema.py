@@ -24,6 +24,7 @@ class QuestionCreate(BaseModel):
     subject: str
     content: str
     create_date: datetime.datetime
+
     @validator('subject', 'content')
     def not_empty(cls, v):
         if not v or not v.strip():

@@ -31,11 +31,6 @@
 
   <title>Sign Up Page</title>
   <style>
-    body {
-      background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
-    }
-
     .signup-container {
       width: 500px;
       background-color: white;

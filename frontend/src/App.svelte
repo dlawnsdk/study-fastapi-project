@@ -5,6 +5,7 @@
   import QuestionCreate from "./routes/QuestionCreate.svelte"
   import Navigation from "./components/Navigation.svelte"
   import UserCreate from "./routes/UserCreate.svelte"
+  import UserLogin from "./routes/UserLogin.svelte";
 
   // 처음 URL을 받으면 해당 경로에 따른 컴포넌트 호출
   const routes = {
@@ -13,7 +14,7 @@
       '/detail/:question_id': Detail,
       '/question-create': QuestionCreate,
       '/user-create': UserCreate,
-
+      '/user-login': UserLogin,
   }
 </script>
 
