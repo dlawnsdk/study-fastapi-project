@@ -2,6 +2,7 @@ import datetime
 
 from pydantic import BaseModel, validator
 from domain.answer.answer_schema import Answer
+from domain.user.user_schema import User
 
 
 class Question(BaseModel):
@@ -10,6 +11,7 @@ class Question(BaseModel):
     content: str
     create_date: datetime.datetime
     answer: list[Answer] = []
+    user: User | None
 
     class Config:
         orm_mode = True

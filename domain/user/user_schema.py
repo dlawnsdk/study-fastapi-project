@@ -26,3 +26,11 @@ class Token(BaseModel):
     token_type: str
     username: str
 
+
+class User(BaseModel):
+    id: int
+    username: str
+    email: str
+
+    class Config:
+        orm_mode = True

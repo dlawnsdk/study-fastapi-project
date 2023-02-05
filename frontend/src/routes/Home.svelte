@@ -33,11 +33,12 @@
 <div class="container my-3">
     <table class="table">
         <thead>
-        <tr class="table-dark">
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성일시</th>
-        </tr>
+            <tr class="text-center table-dark">
+                <th>번호</th>
+                <th style="width:50%">제목</th>
+                <th>글쓴이</th>
+                <th>작성일시</th>
+            </tr>
         </thead>
         <tbody>
         {#each question_list as question, i}
@@ -49,6 +50,7 @@
                         <span class="text-danger small mx-2">{question.answer.length}</span>
                     {/if}
                 </td>
+                <td>{ question.user ? question.user.username : "" }</td>
                 <td>{moment(question.create_date).format('YYYY. MM. DD a hh시')}</td>
             </tr>
         {/each}
