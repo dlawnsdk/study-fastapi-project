@@ -1,6 +1,12 @@
 <script>
     import { link } from 'svelte-spa-router'
     import { page, access_token, username, is_login } from '../lib/store'
+    import fastapi from "../lib/api.js"
+
+    let chatUrl = import.meta.env.VITE_SERVER_CHAT_URL
+    let chat = () => {
+        window.open(chatUrl)
+    }
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
@@ -25,6 +31,9 @@
                             $username = ''
                             $is_login = false
                         }}>로그아웃 ({$username})</a>
+                    </li>
+                   <li class="nav-item">
+                       <span class="nav-link" on:click={chat}>채팅</span>
                     </li>
                 {:else}
                     <li class="nav-item">
