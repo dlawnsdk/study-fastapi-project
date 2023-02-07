@@ -1,5 +1,5 @@
 # study-fastapi-project
-1. ## front-end: svelte
-2. ## back-end: python
->>framework: fastAPI
-3. ## DB: SQlite(변경예정)
++ ## front-end: svelte
++ ## back-end: python
+>framework: fastAPI
++ ## DB: SQlite(변경예정)
