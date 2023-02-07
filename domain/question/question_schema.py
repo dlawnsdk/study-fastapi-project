@@ -32,3 +32,8 @@ class QuestionCreate(BaseModel):
         if not v or not v.strip():
             raise ValueError('빈 값은 허용되지 않습니다.')
         return v
+
+
+# 상속
+class QuestionUpdate(QuestionCreate):
+    question_id: int

@@ -7,7 +7,7 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
     let method = operation
     let content_type = 'application/json' // body에 들어갈 데이터 타입을 header에 명시
     let body = JSON.stringify(params) // body 항목에 전달 받은  parameter를 할당 하려면 JSON 타입으로 변환 해야 한다.
-
+    console.log(body)
     // OAuth2의 로그인 수행
     if(operation === 'login') {
         method = 'post'

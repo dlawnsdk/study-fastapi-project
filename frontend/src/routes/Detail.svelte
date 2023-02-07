@@ -1,7 +1,8 @@
 <script>
     import fastapi from "../lib/api";
     import Error from "../components/Error.svelte"
-    import { push } from 'svelte-spa-router'
+    import { link, push } from 'svelte-spa-router'
+    import { is_login, username } from "../lib/store.js";
     import moment from 'moment/min/moment-with-locales'
     moment.locale('ko')
 
@@ -29,8 +30,7 @@
         fastapi('post', url, params, (json) =>{
             content = ''
             get_question()
-            }
-        )
+        })
     }
 </script>
 <div class="container my-3">
@@ -44,6 +44,11 @@
                     <div calss="mb-2">{ question.user ? question.user.username : ""}</div>
                     <div>{moment(question.create_date).format("YYYY. MM. DD a hh시")}</div>
                 </div>
+            </div>
+            <div class="my-3">
+                {#if question.user && $username === question.user.username}
+                    <a use:link href="/question-modify/{question.id}" class="btn btn-sm btn-outline-secondary">수정</a>
+                {/if}
             </div>
         </div>
     </div>
@@ -62,6 +67,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     {/each}
     <form method="post" class="my-3">
