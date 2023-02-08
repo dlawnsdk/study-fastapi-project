@@ -56,13 +56,11 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
     }
 
 
-def get_current_user(token: str = Depends(oauth2_scheme),
-                     db: Session = Depends(get_db)):
-    print("error 1 ")
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
+        headers={"WWW-Authenticate": "Bearer"}
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -70,14 +68,9 @@ def get_current_user(token: str = Depends(oauth2_scheme),
         if username is None:
             raise credentials_exception
     except JWTError:
-        print("error 2 ")
         raise credentials_exception
     else:
-        print("error 3 ")
         user = user_crud.get_user(db, username=username)
-        print("error 4 ", user.username)
         if user is None:
-            print("try")
             raise credentials_exception
-        print("catch")
         return user
