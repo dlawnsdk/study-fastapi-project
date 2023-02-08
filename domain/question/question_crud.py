@@ -32,3 +32,8 @@ def update_question(db: Session, db_question: Question, question_update: Questio
     db_question.modify_date = datetime.now()
     db.add(db_question)
     db.commit()
+
+
+def delete_question(db: Session, db_question: Question):
+    db.delete(db_question)
+    db.commit()

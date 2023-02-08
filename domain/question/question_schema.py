@@ -25,6 +25,7 @@ class QuestionList(BaseModel):
 class QuestionCreate(BaseModel):
     subject: str
     content: str
+
     # create_date: datetime.datetime
 
     @validator('subject', 'content')
@@ -36,4 +37,8 @@ class QuestionCreate(BaseModel):
 
 # 상속
 class QuestionUpdate(QuestionCreate):
+    question_id: int
+
+
+class QuestionDelete(BaseModel):
     question_id: int
