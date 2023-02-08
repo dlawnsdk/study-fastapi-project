@@ -25,7 +25,7 @@ class QuestionList(BaseModel):
 class QuestionCreate(BaseModel):
     subject: str
     content: str
-    create_date: datetime.datetime
+    # create_date: datetime.datetime
 
     @validator('subject', 'content')
     def not_empty(cls, v):

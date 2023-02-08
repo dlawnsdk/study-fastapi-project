@@ -39,6 +39,7 @@ def question_create(_question_create: question_schema.QuestionCreate, db: Sessio
 def question_update(_question_update: question_schema.QuestionUpdate,
                     db: Session = Depends(get_db),
                     current_user: User = Depends(get_current_user)):
+    print("@@@@@@@@@@")
     db_question = question_crud.get_question(db, question_id=_question_update.question_id)
     print("test", db_question)
     if not db_question:
