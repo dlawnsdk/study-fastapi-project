@@ -32,3 +32,15 @@ def answer_create(question_id: int,
     url = question_router.url_path_for('question_detail',
                                        question_id=question_id)
     return RedirectResponse(url, status_code=303)
+
+@router.get("/detail/{answer_id}", response_model=answer_schema.Answer)
+def answer_detail(answer_id: int, db: Session = Depends(get_db)):
+    answer = answer_crud.get_answer(db, answer_id=answer_id)
+    return answer
+
+@router.post("/vote", status_code=status.HTTP_204_NO_CONTENT)
+def answer_vote(_answer_vote: answer_schema.AnswerVote, db: Session = Depends(get_db), current_user: User =Depends(get_current_user)):
+    db_answer = answer_crud.get_answer(db, answer_id=_answer_vote.answer_id)
+    if not db_answer:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="데이터를 찾을 수 없다.")
+    answer_crud.vote_answer(db, db_answer=db_answer, db_user=current_user)

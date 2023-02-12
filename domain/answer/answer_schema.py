@@ -3,6 +3,7 @@ import datetime
 from pydantic import BaseModel, validator
 from domain.user.user_schema import User
 
+
 class AnswerCreate(BaseModel):
     content: str
 
@@ -18,6 +19,12 @@ class Answer(BaseModel):
     content: str
     create_date: datetime.datetime
     user: User | None
+    modify_date: datetime.datetime | None = None
+    voter: list[User] = []
 
     class Config:
         orm_mode = True
+
+
+class AnswerVote(BaseModel):
+    answer_id: int
