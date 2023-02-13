@@ -7,7 +7,6 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
     let method = operation
     let content_type = 'application/json' // body에 들어갈 데이터 타입을 header에 명시
     let body = JSON.stringify(params) // body 항목에 전달 받은  parameter를 할당 하려면 JSON 타입으로 변환 해야 한다.
-    console.log(body)
     // OAuth2의 로그인 수행
     if(operation === 'login') {
         method = 'post'
@@ -17,26 +16,25 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
 
     let _url = import.meta.env.VITE_SERVER_URL + url // 사이트 URL(도메인)을 .env 파일에서 상수 값으로 받아온다.(개발환경 세팅)
 
-    // 메소드가 GET방식인 경우 URL 세팅
-    if(method === 'get'){
-        _url += "?" + new URLSearchParams(params)
-    }
-
     let options = {
         method: method,
         headers: {
            "Content-Type": content_type,
         },
     }
+
+    // 메소드가 GET방식인 경우 URL 세팅
+    if(method === 'get'){
+        _url += "?" + new URLSearchParams(params)
+    }else{
+        options['body'] = body
+    }
+
     // fastpi함수는 스토어 변수를 사용할 때 $기호를 사용할 수 없다.
     // 스토어 변수를 읽으려면 get 함수를 사용 저장할때는 set함수
     const _access_token = get(access_token)
     if(_access_token){
         options.headers["Authorization"] = "Bearer " + _access_token
-    }
-
-    if(method !== 'get'){
-        options['body'] = body
     }
 
     // Server로 URL 전달
