@@ -19,11 +19,20 @@ class Answer(BaseModel):
     content: str
     create_date: datetime.datetime
     user: User | None
+    question_id: int
     modify_date: datetime.datetime | None = None
     voter: list[User] = []
 
     class Config:
         orm_mode = True
+
+
+class AnswerUpdate(AnswerCreate):
+    answer_id: int
+
+
+class AnswerDelete(BaseModel):
+    answer_id: int
 
 
 class AnswerVote(BaseModel):

@@ -1,6 +1,6 @@
 <script>
     import { link } from 'svelte-spa-router'
-    import { page, access_token, username, is_login } from '../lib/store'
+    import {page, access_token, username, is_login, keyword} from '../lib/store'
     import fastapi from "../lib/api.js"
 
     let chatUrl = import.meta.env.VITE_SERVER_CHAT_URL
@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
-        <a use:link class="navbar-brand" href="/" on:click={() => {$page = 0}}>Pybo</a>
+        <a use:link class="navbar-brand" href="/" on:click={() => {$keyword = '', $page = 0}}>Pybo</a>
         <button
             class="navbar-toggler"
             type="button"

@@ -33,6 +33,17 @@ def answer_create(question_id: int,
                                        question_id=question_id)
     return RedirectResponse(url, status_code=303)
 
+
+@router.put("/update", status_code=status.HTTP_204_NO_CONTENT)
+def amswer_update(_answer_update: answer_schema.AnswerUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    db_answer = answer_crud.get_answer(db, answer_id=_answer_update.answer_id)
+    if not db_answer:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="데이터를 찾을 수 없습니다.")
+    if current_user.id != db_answer.user.id:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="수정 권한이 없습니다.")
+    answer_crud.update_answer(db=db, db_answer=db_answer, answer_updaete=_answer_update)
+
+
 @router.get("/detail/{answer_id}", response_model=answer_schema.Answer)
 def answer_detail(answer_id: int, db: Session = Depends(get_db)):
     answer = answer_crud.get_answer(db, answer_id=answer_id)

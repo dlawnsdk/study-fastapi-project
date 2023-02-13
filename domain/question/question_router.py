@@ -15,8 +15,8 @@ router = APIRouter(
 
 
 @router.get("/list", response_model=question_schema.QuestionList)
-def question_list(db: Session = Depends(get_db), page: int = 0, size: int = 10):
-    total, _question_list = question_crud.get_question_list(db, skip=page * size, limit=size)
+def question_list(db: Session = Depends(get_db), page: int = 0, size: int = 10, keyword: str = ''):
+    total, _question_list = question_crud.get_question_list(db, skip=page * size, limit=size, keyword=keyword)
     return {
         'total': total,
         'question_list': _question_list,
@@ -36,9 +36,7 @@ def question_create(_question_create: question_schema.QuestionCreate, db: Sessio
 
 
 @router.put("/update", status_code=status.HTTP_204_NO_CONTENT)
-def question_update(_question_update: question_schema.QuestionUpdate,
-                    db: Session = Depends(get_db),
-                    current_user: User = Depends(get_current_user)):
+def question_update(_question_update: question_schema.QuestionUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     db_question = question_crud.get_question(db, question_id=_question_update.question_id)
     if not db_question:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
